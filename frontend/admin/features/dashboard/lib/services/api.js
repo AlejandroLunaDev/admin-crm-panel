@@ -9,7 +9,6 @@ import {
   actionsAdapter,
   leadsAdapter,
   ticketsAdapter,
-  contentActivitiesAdapter,
   calendarActivitiesAdapter
 } from '../adapters';
 
@@ -18,8 +17,7 @@ import {
   overviewAlerts,
   quickActions,
   recentLeads,
-  recentTickets,
-  contentActivities
+  recentTickets
 } from '../config/mockedData';
 
 // Constante para el BaseURL de la API
@@ -128,26 +126,7 @@ export async function fetchRecentTickets(limit = 5) {
   }
 }
 
-/**
- * Obtiene las actividades de contenido recientes
- * @param {number} limit - Cantidad de actividades a obtener
- * @returns {Promise<Array>} - Actividades de contenido
- */
-export async function fetchContentActivities(limit = 4) {
-  try {
-    // Cuando exista el endpoint:
-    // const response = await fetch(`${API_BASE_URL}/api/content/activities?limit=${limit}`);
-    // if (!response.ok) throw new Error('Error fetching content activities');
-    // return await response.json();
 
-    // Mientras tanto, usar datos mock
-    return Promise.resolve(contentActivities.slice(0, limit));
-  } catch (error) {
-    console.error('Error fetching content activities:', error);
-    // Fallback a datos mock en caso de error
-    return contentActivities.slice(0, limit);
-  }
-}
 
 /**
  * Obtiene las actividades del calendario

@@ -52,15 +52,12 @@ export default function LoginPage() {
             height={1000}
             priority
           />
-          {/* Logo sobrepuesto */}
+          {/* Título sobrepuesto */}
           <div className='absolute top-6 left-10'>
-            <Image
-              src='/svgs/logologin.svg'
-              alt='Logo'
-              width={200}
-              height={80}
-              className='h-auto'
-            />
+            <div className='bg-white/90 backdrop-blur-sm px-6 py-3 rounded-lg shadow-lg'>
+              <h1 className='text-2xl font-bold text-purple-800'>Admin CRM</h1>
+              <p className='text-sm text-gray-600'>Panel de Administración</p>
+            </div>
           </div>
         </div>
 
@@ -68,11 +65,14 @@ export default function LoginPage() {
         <div className='w-full md:w-1/2 flex items-center justify-center py-8 px-8 md:px-10'>
           <div className='w-full max-w-md'>
             <div className='text-center mb-6'>
-              <h2 className='text-xl font-semibold text-gray-900'>
-                Iniciar Sesión
+              <h2 className='text-2xl font-bold text-gray-900 mb-2'>
+                Admin CRM
               </h2>
-              <p className='mt-2 text-sm text-gray-600'>
-                Ingresa tus credenciales para acceder al panel de administrador.
+              <h3 className='text-lg font-semibold text-purple-800 mb-3'>
+                Iniciar Sesión
+              </h3>
+              <p className='text-sm text-gray-600'>
+                Ingresa tus credenciales para acceder al panel de administración.
               </p>
             </div>
 
@@ -86,7 +86,7 @@ export default function LoginPage() {
 
             <div className='text-center mt-6 text-xs text-gray-500'>
               <p>
-                © {new Date().getFullYear()} Play Attention Argentina. Todos los
+                © {new Date().getFullYear()} Admin CRM Panel. Todos los
                 derechos reservados.
               </p>
             </div>

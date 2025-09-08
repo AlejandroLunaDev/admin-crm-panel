@@ -55,16 +55,7 @@ const mockAlerts = [
     actionText: 'Atender ahora',
     actionUrl: '/tickets'
   },
-  {
-    id: 3,
-    title: 'Contenido pendiente de revisión',
-    description: '3 artículos están en borrador y necesitan ser publicados',
-    type: 'content',
-    icon: FileText,
-    color: 'primary',
-    actionText: 'Atender ahora',
-    actionUrl: '/content'
-  },
+
   {
     id: 4,
     title: 'Webinar próximo',
@@ -105,16 +96,7 @@ const mockAlerts = [
     actionText: 'Revisar pagos',
     actionUrl: '/finances'
   },
-  {
-    id: 8,
-    title: 'Comentarios nuevos',
-    description: '6 comentarios recientes requieren moderación',
-    type: 'content',
-    icon: FileText,
-    color: 'primary',
-    actionText: 'Moderar',
-    actionUrl: '/comments'
-  }
+
 ];
 
 export default function Dashboard() {
@@ -229,23 +211,16 @@ export default function Dashboard() {
                   change={metrics.users.change}
                   trend={metrics.users.trend}
                   icon={Users}
-                  color='content'
+                  color='users'
                 />
-                <MetricCard
-                  title='Contenido Total'
-                  value={metrics.content.total.toString()}
-                  change={metrics.content.change}
-                  trend={metrics.content.trend}
-                  icon={FileText}
-                  color='content'
-                />
+
                 <MetricCard
                   title='Tickets Abiertos'
                   value={metrics.tickets.openTickets.toString()}
                   change={metrics.tickets.change}
                   trend={metrics.tickets.trend}
                   icon={TicketCheck}
-                  color='content'
+                  color='tickets'
                 />
                 <MetricCard
                   title='Notificaciones'
@@ -253,7 +228,7 @@ export default function Dashboard() {
                   change={metrics.notifications.change}
                   trend={metrics.notifications.trend}
                   icon={Bell}
-                  color='content'
+                  color='conversions'
                 />
               </>
             )}
@@ -501,26 +476,20 @@ export default function Dashboard() {
 
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6 h-full'>
             <ActionCard
-              title='Crear Lead'
+              title='Registrar Lead'
               description='Registra un nuevo lead de ventas'
               icon={UserPlus}
-              color='content'
+              color='leads'
               link='/crm/new'
             />
             <ActionCard
               title='Responder Tickets'
               description='Gestionar tickets de soporte pendientes'
               icon={TicketCheck}
-              color='content'
+              color='tickets'
               link='/tickets'
             />
-            <ActionCard
-              title='Publicar Contenido'
-              description='Crear o editar contenido del sitio'
-              icon={FileText}
-              color='content'
-              link='/content'
-            />
+
           </div>
         </TabsContent>
       </Tabs>
@@ -559,12 +528,7 @@ export default function Dashboard() {
                 {metrics.users.total}
               </p>
             </div>
-            <div className='bg-white p-3 rounded border text-center'>
-              <p className='text-xs text-gray-500'>Contenido</p>
-              <p className='text-xl font-bold text-purple-600'>
-                {metrics.content.total}
-              </p>
-            </div>
+
           </div>
         </div>
       )}

@@ -9,7 +9,7 @@ export { default as MetricCard } from './components/MetricCard';
 export { default as ActionCard } from './components/ActionCard';
 export { default as AlertCard } from './components/AlertCard';
 export { default as ActivityCalendar } from './components/ActivityCalendar';
-export { default as ContentActivity } from './components/ContentActivity';
+
 export { default as RecentTickets } from './components/RecentTickets';
 export { default as LeadTracker } from './components/LeadTracker';
 
@@ -24,7 +24,7 @@ export {
   fetchQuickActions,
   fetchRecentLeads,
   fetchRecentTickets,
-  fetchContentActivities,
+
   fetchCalendarActivities
 } from './lib/services/api';
 
@@ -35,7 +35,7 @@ export {
   actionsAdapter,
   leadsAdapter,
   ticketsAdapter,
-  contentActivitiesAdapter,
+
   calendarActivitiesAdapter
 } from './lib/adapters';
 
@@ -46,5 +46,5 @@ export {
   quickActions,
   recentLeads,
   recentTickets,
-  contentActivities
+
 } from './lib/config/mockedData';

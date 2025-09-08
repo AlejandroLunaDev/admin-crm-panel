@@ -372,7 +372,7 @@ export default function LeadList({
     fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL ||
-        'https://play-attention.onrender.com/api'
+        'https://admin-crm-panel-back.onrender.com/api'
       }/leads/${leadId}`,
       {
         method: 'PUT',

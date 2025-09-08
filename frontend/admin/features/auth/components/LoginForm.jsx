@@ -18,8 +18,8 @@ import Link from 'next/link';
  */
 export default function LoginForm({ redirectUrl = '/dashboard' }) {
   const [credentials, setCredentials] = useState({
-    email: '',
-    password: ''
+    email: 'admin@admin.com',
+    password: '123456'
   });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -44,7 +44,22 @@ export default function LoginForm({ redirectUrl = '/dashboard' }) {
 
   return (
     <>
+      {/* Mensaje de demo */}
+      <div className='mb-6 p-4 bg-purple-50 border border-purple-200 rounded-lg'>
+        <div className='flex items-center mb-2'>
+          <div className='w-2 h-2 bg-purple-600 rounded-full mr-2'></div>
+          <h3 className='text-sm font-semibold text-purple-800'>Demo del Portfolio</h3>
+        </div>
+        <p className='text-xs text-purple-700 leading-relaxed'>
+          Este es un proyecto de demostración. Las credenciales ya están configuradas.
+          <br />
+          <strong>Solo haz clic en "Iniciar Sesión"</strong> para explorar el panel administrativo.
+        </p>
+      </div>
+
       <form onSubmit={handleSubmit} className='space-y-6'>
+        {/* Campos comentados para demo - descomenta si necesitas los inputs */}
+        {/*
         <div>
           <Label
             htmlFor='email'
@@ -58,10 +73,11 @@ export default function LoginForm({ redirectUrl = '/dashboard' }) {
             type='email'
             autoComplete='email'
             required
-            placeholder='admin@gmail.com'
+            placeholder='admin@admin.com'
             value={credentials.email}
             onChange={handleChange}
-            className='w-full h-10 rounded shadow-sm border-gray-300 bg-gray-50 focus:border-purple-500 focus:ring-purple-500'
+            disabled
+            className='w-full h-10 rounded shadow-sm border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed'
           />
         </div>
 
@@ -74,12 +90,9 @@ export default function LoginForm({ redirectUrl = '/dashboard' }) {
               Contraseña
             </Label>
             <div className='text-xs'>
-              <Link
-                href='/forgot-password'
-                className='font-medium text-purple-600 hover:text-purple-500'
-              >
+              <span className='text-gray-400 cursor-not-allowed'>
                 ¿Olvidaste tu contraseña?
-              </Link>
+              </span>
             </div>
           </div>
           <div className='relative'>
@@ -89,15 +102,17 @@ export default function LoginForm({ redirectUrl = '/dashboard' }) {
               type={showPassword ? 'text' : 'password'}
               autoComplete='current-password'
               required
-              placeholder='••••••••'
+              placeholder='123456'
               value={credentials.password}
               onChange={handleChange}
-              className='w-full h-10 rounded shadow-sm border-gray-300 bg-gray-50 focus:border-purple-500 focus:ring-purple-500 pr-10'
+              disabled
+              className='w-full h-10 rounded shadow-sm border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed pr-10'
             />
             <button
               type='button'
-              className='absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600'
+              className='absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400'
               onClick={togglePasswordVisibility}
+              disabled
             >
               {showPassword ? (
                 <EyeOff className='h-5 w-5' />
@@ -107,6 +122,7 @@ export default function LoginForm({ redirectUrl = '/dashboard' }) {
             </button>
           </div>
         </div>
+        */}
 
         {login.isError && (
           <Alert variant='destructive' className='py-2'>

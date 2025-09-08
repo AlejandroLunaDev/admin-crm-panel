@@ -1,35 +1,24 @@
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
-import Image from 'next/image';
 import Link from 'next/link';
 
 /**
- * Componente que maneja la visualización del logo en el sidebar
- * Usando el logo oficial con indicador de admin
+ * Componente que maneja la visualización del título en el sidebar
+ * Muestra "Admin Panel" para uso en portfolio
  */
 export function SidebarLogo({ expanded, className }) {
   return (
-    <Link href='/' className={cn('flex items-start', className)}>
+    <Link href='/' className={cn('flex items-center', className)}>
       {expanded ? (
-        // Logo completo para sidebar expandido
-        <Image
-          src='/svgs/logoadmin.svg'
-          alt='Play Attention Admin'
-          width={160}
-          height={40}
-          className='object-contain'
-          priority
-        />
+        // Título completo para sidebar expandido
+        <h1 className='text-xl font-bold text-white'>
+          Admin Panel
+        </h1>
       ) : (
-        // Logo reducido para sidebar colapsado
-        <Image
-          src='/svgs/logowhite.svg'
-          alt='Play Attention'
-          width={32}
-          height={32}
-          className='object-contain'
-          priority
-        />
+        // Título reducido para sidebar colapsado
+        <h1 className='text-lg font-bold text-white'>
+          AP
+        </h1>
       )}
     </Link>
   );

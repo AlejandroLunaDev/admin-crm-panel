@@ -23,15 +23,7 @@ export const dashboardMetrics = [
     color: 'blue',
     link: '/users'
   },
-  {
-    title: 'Contenido Total',
-    value: '87',
-    change: '+5%',
-    trend: 'up',
-    icon: FileText,
-    color: 'indigo',
-    link: '/content'
-  },
+
   {
     title: 'Tickets Abiertos',
     value: '14',
