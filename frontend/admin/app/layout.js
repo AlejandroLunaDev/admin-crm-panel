@@ -12,14 +12,9 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  title: 'Play Attention | Panel de Administración',
+  title: 'Admin CRM | Panel de Administración',
   description:
-    'Panel administrativo y CRM para la gestión de contenidos, usuarios y soporte de Play Attention',
-  icons: {
-    icon: '/img/logospinner.png',
-    apple: '/img/logospinner.png',
-    shortcut: '/img/logospinner.png'
-  },
+    'Panel administrativo CRM para la gestión de clientes, tickets, usuarios y soporte técnico',
   viewport: {
     width: 'device-width',
     initialScale: 1,

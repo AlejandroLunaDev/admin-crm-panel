@@ -47,7 +47,7 @@ export default function NotFound() {
 
         {/* Marca */}
         <div className='mt-16'>
-          <p className='font-bold text-xl text-white'>Play Attention</p>
+          <p className='font-bold text-xl text-white'>Admin CRM</p>
           <p className='text-sm text-white/80'>
             Mantente enfocado, mantente productivo
           </p>

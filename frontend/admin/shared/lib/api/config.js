@@ -22,21 +22,21 @@ export const setApiUrl = url => {
 export const API_ENDPOINTS = {
   // Auth
   auth: {
-    login: `${API_URL}/api/auth/login`,
-    register: `${API_URL}/api/auth/register`,
-    forgotPassword: `${API_URL}/api/auth/forgot-password`,
-    changePassword: `${API_URL}/api/auth/change-password`,
-    resetPassword: `${API_URL}/api/auth/reset-password`,
-    confirmToken: `${API_URL}/api/auth/confirm-token`,
-    profile: `${API_URL}/api/auth/profile`
+    login: `${API_URL}/auth/login`,
+    register: `${API_URL}/auth/register`,
+    forgotPassword: `${API_URL}/auth/forgot-password`,
+    changePassword: `${API_URL}/auth/change-password`,
+    resetPassword: `${API_URL}/auth/reset-password`,
+    confirmToken: `${API_URL}/auth/confirm-token`,
+    profile: `${API_URL}/auth/profile`
   },
   // Usuarios
   users: {
-    getById: id => `${API_URL}/api/users/${id}`,
-    list: `${API_URL}/api/users`,
-    create: `${API_URL}/api/users`,
-    update: id => `${API_URL}/api/users/${id}`,
-    delete: id => `${API_URL}/api/users/${id}`
+    getById: id => `${API_URL}/users/${id}`,
+    list: `${API_URL}/users`,
+    create: `${API_URL}/users`,
+    update: id => `${API_URL}/users/${id}`,
+    delete: id => `${API_URL}/users/${id}`
   }
   // Otros endpoints aquí
 };
