@@ -84,70 +84,17 @@ export default function TicketManager() {
     refetch
   } = useTickets(apiOptions);
 
-  // Para fines de demo, creamos algunos tickets de ejemplo si no hay datos
-  const demoTickets = useMemo(() => {
-    // Solo crear tickets de demo si no hay tickets reales
-    if (ticketsData.tickets && ticketsData.tickets.length > 0) {
-      return ticketsData.tickets;
-    }
-
-    // Crear tickets de demo
-    const today = new Date();
-
-    return [
-      {
-        id: 'demo-1',
-        subject: 'Problema con la aplicación móvil',
-        description:
-          'La aplicación se cierra inesperadamente al intentar cargar imágenes',
-        status: 'abierto',
-        priority: 'alta',
-        createdAt: today.toISOString(),
-        userName: 'Juan Pérez',
-        userEmail: 'juan@ejemplo.com'
-      },
-      {
-        id: 'demo-2',
-        subject: 'Solicitud de característica nueva',
-        description: 'Me gustaría que se añadiera la opción de exportar a PDF',
-        status: 'en proceso',
-        priority: 'media',
-        createdAt: today.toISOString(),
-        userName: 'María García',
-        userEmail: 'maria@ejemplo.com'
-      },
-      {
-        id: 'demo-3',
-        subject: 'Error en el proceso de pago',
-        description:
-          'Al intentar pagar recibo un error de "transacción fallida"',
-        status: 'abierto',
-        priority: 'alta',
-        createdAt: today.toISOString(),
-        userName: 'Carlos López',
-        userEmail: 'carlos@ejemplo.com'
-      },
-      {
-        id: 'demo-4',
-        subject: 'Pregunta sobre facturación',
-        description: '¿Cuándo se realizan los cargos mensuales?',
-        status: 'en proceso',
-        priority: 'baja',
-        createdAt: today.toISOString(),
-        userName: 'Ana Martínez',
-        userEmail: 'ana@ejemplo.com'
-      }
-    ];
-  }, [ticketsData.tickets]);
+  // Usar directamente los tickets del backend sin datos de demo
+  const tickets = ticketsData.tickets || [];
 
   // Procesamiento de los tickets para mostrar
   const ticketListData = useMemo(() => {
-    // Obtener los tickets (ya sea demo o reales)
-    let tickets = demoTickets.length > 0 ? demoTickets : ticketsData.tickets;
+    // Usar los tickets del backend
+    let processedTickets = tickets;
 
     // Ordenación secundaria en el cliente como respaldo
-    if (tickets && tickets.length > 0) {
-      tickets = [...tickets].sort((a, b) => {
+    if (processedTickets && processedTickets.length > 0) {
+      processedTickets = [...processedTickets].sort((a, b) => {
         // Obtener fechas de creación
         const dateA = new Date(a.createdAt || a.date || 0);
         const dateB = new Date(b.createdAt || b.date || 0);
@@ -167,10 +114,10 @@ export default function TicketManager() {
     }
 
     return {
-      tickets: tickets,
-      total: tickets.length
+      tickets: processedTickets,
+      total: processedTickets.length
     };
-  }, [demoTickets, ticketsData, sortOrder]);
+  }, [tickets, sortOrder]);
 
   // Hooks para operaciones de actualización y eliminación
   const updateTicketMutation = useUpdateTicket();
@@ -350,7 +297,7 @@ export default function TicketManager() {
           <TicketList
             tickets={ticketListData.tickets}
             onSelectTicket={handleSelectTicket}
-            isLoading={isLoading && demoTickets.length === 0}
+            isLoading={isLoading}
             // Ya no necesitamos paginación
             totalTickets={ticketListData.total}
             noPagination={true}
@@ -362,16 +309,7 @@ export default function TicketManager() {
             onClose={handleCloseCreateModal}
           />
 
-          {/* Mensaje para indicar el modo demo */}
-          {demoTickets.length > 0 && ticketsData.tickets.length === 0 && (
-            <div className='mt-4 p-3 bg-yellow-50 border border-yellow-100 rounded-md text-sm text-yellow-700'>
-              <p className='font-medium'>Modo demostración</p>
-              <p>
-                Se están mostrando tickets de ejemplo para visualizar la
-                funcionalidad.
-              </p>
-            </div>
-          )}
+
         </>
       )}
     </div>

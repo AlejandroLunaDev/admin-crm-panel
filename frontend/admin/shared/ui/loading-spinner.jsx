@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 
@@ -10,7 +10,7 @@ import { cn } from '@/shared/lib/utils';
  * @param {object} props - Propiedades del componente
  * @param {string} [props.text='Cargando'] - Texto a mostrar bajo el spinner
  * @param {string} [props.className] - Clases CSS adicionales para el contenedor
- * @param {string} [props.logoSrc='/img/logospinner.png'] - Ruta de la imagen del logo
+
  * @param {number} [props.size=36] - Tamaño del logo en px
  * @param {string} [props.spinnerColor='border-primary'] - Color del spinner
  * @param {boolean} [props.showText=true] - Si se debe mostrar el texto
@@ -18,7 +18,6 @@ import { cn } from '@/shared/lib/utils';
 export function LoadingSpinner({
   text = 'Cargando',
   className,
-  logoSrc = '/img/logospinner.png',
   size = 36,
   spinnerColor = 'border-primary',
   showText = true
@@ -103,27 +102,16 @@ export function LoadingSpinner({
           </svg>
         </div>
 
-        {/* Logo centrado con animación de pulsación - Perfectamente centrado */}
-        <div
-          className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse'
-          style={{
-            animationDuration: '2.5s'
-          }}
-        >
+        {/* Punto central decorativo */}
+        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
           <div
-            className='relative animate-logo-scale'
+            className='rounded-full bg-primary/20 animate-pulse'
             style={{
-              width: `${logoSize}px`,
-              height: `${logoSize}px`
+              width: `${logoSize * 0.3}px`,
+              height: `${logoSize * 0.3}px`,
+              animationDuration: '2.5s'
             }}
-          >
-            <Image
-              src={logoSrc}
-              alt='Logo'
-              fill
-              className='object-contain drop-shadow-md'
-            />
-          </div>
+          />
         </div>
       </div>
 
