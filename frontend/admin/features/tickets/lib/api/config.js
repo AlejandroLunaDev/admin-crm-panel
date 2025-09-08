@@ -4,7 +4,7 @@
  */
 
 // URL base para todas las llamadas a la API
-export const API_URL = 'https://play-attention.onrender.com/api';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://admin-crm-panel-back.onrender.com/api';
 
 // Headers comunes para todas las peticiones
 export const commonHeaders = {

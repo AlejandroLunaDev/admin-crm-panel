@@ -33,16 +33,7 @@ export const dashboardAlerts = [
     actionText: 'Atender ahora',
     actionUrl: '/tickets'
   },
-  {
-    id: 3,
-    title: 'Contenido pendiente de revisión',
-    description: '3 artículos están en borrador y necesitan ser publicados',
-    type: 'content',
-    icon: FileText,
-    color: 'primary',
-    actionText: 'Atender ahora',
-    actionUrl: '/content'
-  },
+
   {
     id: 4,
     title: 'Webinar próximo',
@@ -83,16 +74,7 @@ export const dashboardAlerts = [
     actionText: 'Revisar pagos',
     actionUrl: '/finances'
   },
-  {
-    id: 8,
-    title: 'Comentarios nuevos',
-    description: '6 comentarios recientes requieren moderación',
-    type: 'content',
-    icon: FileText,
-    color: 'primary',
-    actionText: 'Moderar',
-    actionUrl: '/comments'
-  }
+
 ];
 
 /**
@@ -113,13 +95,7 @@ export const overviewAlerts = [
     color: 'red',
     action: '/tickets?filter=sin_responder'
   },
-  {
-    title: 'Contenido pendiente de revisión',
-    description: '3 artículos están en borrador y necesitan ser publicados',
-    icon: FileText,
-    color: 'amber',
-    action: '/content?status=borrador'
-  },
+
   {
     title: 'Webinar próximo',
     description: 'El webinar "Técnicas de concentración" comienza en 2 días',

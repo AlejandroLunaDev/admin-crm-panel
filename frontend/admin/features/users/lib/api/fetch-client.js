@@ -2,7 +2,7 @@
  * Cliente Fetch para solicitudes API
  */
 
-const API_URL = 'https://play-attention.onrender.com/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://admin-crm-panel-back.onrender.com/api';
 
 /**
  * Obtiene el token de autenticación de las cookies

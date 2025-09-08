@@ -13,7 +13,6 @@ import {
   fetchQuickActions,
   fetchRecentLeads,
   fetchRecentTickets,
-  fetchContentActivities,
   fetchCalendarActivities
 } from '../services/api';
 
@@ -23,7 +22,6 @@ import {
   actionsAdapter,
   leadsAdapter,
   ticketsAdapter,
-  contentActivitiesAdapter,
   calendarActivitiesAdapter
 } from '../adapters';
 
@@ -49,7 +47,6 @@ export const useDashboardStore = create(
       quickActions: [],
       recentLeads: [],
       recentTickets: [],
-      contentActivities: [],
       calendarActivities: [],
 
       // Estados de carga
@@ -59,7 +56,6 @@ export const useDashboardStore = create(
         quickActions: false,
         recentLeads: false,
         recentTickets: false,
-        contentActivities: false,
         calendarActivities: false
       },
 
@@ -70,7 +66,6 @@ export const useDashboardStore = create(
         quickActions: null,
         recentLeads: null,
         recentTickets: null,
-        contentActivities: null,
         calendarActivities: null
       },
 
@@ -81,7 +76,6 @@ export const useDashboardStore = create(
         quickActions: null,
         recentLeads: null,
         recentTickets: null,
-        contentActivities: null,
         calendarActivities: null
       },
 
@@ -304,41 +298,7 @@ export const useDashboardStore = create(
         }
       },
 
-      fetchContentActivities: async (limit = 4) => {
-        const { isLoading } = get();
 
-        if (isLoading.contentActivities) return;
-
-        set(state => ({
-          isLoading: { ...state.isLoading, contentActivities: true },
-          errors: { ...state.errors, contentActivities: null }
-        }));
-
-        try {
-          const apiData = await fetchContentActivities(limit);
-          const contentActivities = contentActivitiesAdapter(apiData);
-
-          set(state => ({
-            contentActivities,
-            lastUpdated: {
-              ...state.lastUpdated,
-              contentActivities: new Date().toISOString()
-            }
-          }));
-        } catch (error) {
-          set(state => ({
-            errors: {
-              ...state.errors,
-              contentActivities:
-                error.message || 'Error al cargar actividades de contenido'
-            }
-          }));
-        } finally {
-          set(state => ({
-            isLoading: { ...state.isLoading, contentActivities: false }
-          }));
-        }
-      },
 
       fetchCalendarActivities: async (year, month) => {
         const { isLoading } = get();
@@ -383,8 +343,7 @@ export const useDashboardStore = create(
           fetchAlerts,
           fetchQuickActions,
           fetchRecentLeads,
-          fetchRecentTickets,
-          fetchContentActivities
+          fetchRecentTickets
         } = get();
 
         // Iniciar todas las cargas en paralelo
@@ -393,8 +352,7 @@ export const useDashboardStore = create(
           fetchAlerts(),
           fetchQuickActions(),
           fetchRecentLeads(),
-          fetchRecentTickets(),
-          fetchContentActivities()
+          fetchRecentTickets()
         ]);
 
         // El calendario se carga con el mes actual

@@ -6,7 +6,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
 
 // Importar hooks de diferentes módulos
-import { useContents } from '../../../content/lib/hooks/useContents';
 import { useLeads } from '../../../crm/lib/hooks/useLeads';
 import { useTickets } from '../../../tickets/lib/hooks/useTickets';
 import useUsers from '../../../users/lib/hooks/useUsers';
@@ -26,11 +25,7 @@ export function useDashboardMetrics() {
       change: '+0% este mes',
       trend: 'neutral'
     },
-    content: {
-      total: 0,
-      change: '+0% este mes',
-      trend: 'neutral'
-    },
+
     tickets: {
       total: 0,
       openTickets: 0,
@@ -60,7 +55,6 @@ export function useDashboardMetrics() {
   const usersQuery = useUsers();
   const leadsQuery = useLeads({ staleTime: 60000 }); // 1 minuto
   const ticketsQuery = useTickets({ staleTime: 60000 }); // 1 minuto
-  const contentsQuery = useContents({ staleTime: 60000 }); // 1 minuto
 
   // Hook personalizado para obtener las notificaciones (simulado)
   const notificationsQuery = useQuery({
@@ -79,21 +73,18 @@ export function useDashboardMetrics() {
       usersQuery.isSuccess &&
       leadsQuery.isSuccess &&
       ticketsQuery.isSuccess &&
-      contentsQuery.isSuccess &&
       notificationsQuery.isSuccess;
 
     const anyError =
       usersQuery.isError ||
       leadsQuery.isError ||
       ticketsQuery.isError ||
-      contentsQuery.isError ||
       notificationsQuery.isError;
 
     const anyLoading =
       usersQuery.isLoading ||
       leadsQuery.isLoading ||
       ticketsQuery.isLoading ||
-      contentsQuery.isLoading ||
       notificationsQuery.isLoading;
 
     // Solo calcular si todos los datos están disponibles y no estamos cargando
@@ -104,7 +95,7 @@ export function useDashboardMetrics() {
       const users = usersQuery.data?.data || [];
       const leads = leadsQuery.data || [];
       const tickets = ticketsQuery.data?.tickets || [];
-      const contents = contentsQuery.data || [];
+
       const notifications = notificationsQuery.data || { total: 0, new: 0 };
 
       // Calcular métricas de leads
@@ -186,11 +177,7 @@ export function useDashboardMetrics() {
               ? 'down'
               : 'neutral'
         },
-        content: {
-          total: contents.length,
-          change: '+5% este mes', // Simulado, podría calcularse con datos reales si disponibles
-          trend: 'up'
-        },
+
         tickets: {
           total: tickets.length,
           openTickets: openTickets,
@@ -224,12 +211,10 @@ export function useDashboardMetrics() {
     usersQuery.isSuccess,
     leadsQuery.isSuccess,
     ticketsQuery.isSuccess,
-    contentsQuery.isSuccess,
     notificationsQuery.isSuccess,
     usersQuery.isLoading,
     leadsQuery.isLoading,
     ticketsQuery.isLoading,
-    contentsQuery.isLoading,
     notificationsQuery.isLoading
   ]);
 
@@ -239,13 +224,11 @@ export function useDashboardMetrics() {
       usersQuery.isLoading ||
       leadsQuery.isLoading ||
       ticketsQuery.isLoading ||
-      contentsQuery.isLoading ||
       notificationsQuery.isLoading,
     isError:
       usersQuery.isError ||
       leadsQuery.isError ||
       ticketsQuery.isError ||
-      contentsQuery.isError ||
       notificationsQuery.isError,
     metrics
   };

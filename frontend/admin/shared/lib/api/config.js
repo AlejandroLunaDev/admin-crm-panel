@@ -9,7 +9,7 @@ const API_URL =
   // Si no está disponible, intentamos leer de window (cliente)
   (typeof window !== 'undefined' && window.__API_URL__) ||
   // Valor por defecto
-  'https://play-attention.onrender.com';
+  'https://admin-crm-panel-back.onrender.com/api';
 
 // Función para establecer la URL de la API en tiempo de ejecución (cliente)
 export const setApiUrl = url => {

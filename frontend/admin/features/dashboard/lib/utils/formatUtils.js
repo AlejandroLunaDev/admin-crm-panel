@@ -46,14 +46,14 @@ export function getColorCode(color) {
     blue: 'var(--color-users)',
     amber: 'var(--color-tickets)',
     indigo: 'var(--color-conversions)',
-    purple: 'var(--color-content)',
+
     pink: 'var(--primary)',
     gray: 'var(--color-neutral)',
 
     // Colores semánticos
     leads: 'var(--color-leads)',
     tickets: 'var(--color-tickets)',
-    content: 'var(--color-content)',
+
     users: 'var(--color-users)',
     events: 'var(--color-events)',
     notifications: 'var(--color-notifications)',

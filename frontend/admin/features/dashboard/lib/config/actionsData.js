@@ -12,13 +12,7 @@ export const quickActions = [
     color: 'green',
     link: '/leads'
   },
-  {
-    title: 'Crear contenido nuevo',
-    description: 'Añadir artículo, video o material educativo',
-    icon: FileText,
-    color: 'green',
-    link: '/content?new=true'
-  },
+
   {
     title: 'Responder tickets',
     description: 'Ver y responder tickets de soporte',

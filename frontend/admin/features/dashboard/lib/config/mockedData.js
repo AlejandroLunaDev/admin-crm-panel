@@ -91,14 +91,7 @@ export const quickActions = [
     color: 'amber',
     url: '/support/new-ticket'
   },
-  {
-    id: 'qa4',
-    title: 'Nuevo contenido',
-    description: 'Agregar nuevo contenido educativo',
-    icon: 'folderPlus',
-    color: 'purple',
-    url: '/content/new'
-  }
+
 ];
 
 // Leads recientes
@@ -202,42 +195,6 @@ export const recentTickets = [
     priority: 'low',
     createdBy: 'Carlos Rodríguez',
     assignedTo: 'Ventas',
-    date: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString()
-  }
-];
-
-// Actividades de contenido
-export const contentActivities = [
-  {
-    id: 'activity1',
-    title: 'Nuevo curso: Matemáticas Avanzadas',
-    type: 'new-course',
-    description: 'Se ha publicado un nuevo curso de matemáticas avanzadas',
-    author: 'Prof. Martínez',
-    date: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString()
-  },
-  {
-    id: 'activity2',
-    title: 'Actualización: Física Básica',
-    type: 'update',
-    description: 'Se actualizó el módulo 2 del curso de física básica',
-    author: 'Prof. García',
-    date: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString()
-  },
-  {
-    id: 'activity3',
-    title: 'Nueva evaluación: Química Orgánica',
-    type: 'evaluation',
-    description: 'Se ha agregado una nueva evaluación al curso de química',
-    author: 'Prof. López',
-    date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
-  },
-  {
-    id: 'activity4',
-    title: 'Nuevo recurso: Guía de Estudio Historia',
-    type: 'resource',
-    description: 'Nueva guía de estudio para el curso de historia universal',
-    author: 'Prof. Fernández',
     date: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString()
   }
 ];
