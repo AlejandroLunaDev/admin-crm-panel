@@ -3,7 +3,7 @@
  */
 
 // URL base para la API de horarios
-export const API_URL = 'https://play-attention.onrender.com/api/schedule';
+export const API_URL = `${process.env.NEXT_PUBLIC_API_URL || 'https://admin-crm-panel-back.onrender.com'}/schedule`;
 
 // Headers comunes para todas las peticiones
 export const commonHeaders = {

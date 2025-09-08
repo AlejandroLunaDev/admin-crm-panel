@@ -24,7 +24,7 @@ import {
 
 // Constante para el BaseURL de la API
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://api.playattention.com';
+  process.env.NEXT_PUBLIC_API_URL || 'https://admin-crm-panel-back.onrender.com/api';
 
 /**
  * Obtiene las métricas para el dashboard
