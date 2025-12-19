@@ -18,8 +18,8 @@ import Link from 'next/link';
  */
 export default function LoginForm({ redirectUrl = '/dashboard' }) {
   const [credentials, setCredentials] = useState({
-    email: 'admin@admin.com',
-    password: '123456'
+    email: process.env.NEXT_PUBLIC_DEMO_USER_EMAIL || 'admin@admin.com',
+    password: process.env.NEXT_PUBLIC_DEMO_USER_PASSWORD || '123Password*'
   });
   const [showPassword, setShowPassword] = useState(false);
 

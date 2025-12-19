@@ -11,11 +11,22 @@ export async function POST(request) {
   try {
     // Extraer credenciales del body
     const body = await request.json();
-    const { email, password } = body;
+    let { email, password } = body;
 
-    if (!email || !password) {
+    if (!email) {
       return NextResponse.json(
-        { error: 'Email y contraseña son requeridos' },
+        { error: 'Email es requerido' },
+        { status: 400 }
+      );
+    }
+
+    // Si es el usuario demo, usar la contraseña del servidor (no expuesta al cliente)
+    const demoEmail = process.env.DEMO_USER_EMAIL || 'admin@admin.com';
+    if (email === demoEmail) {
+      password = process.env.DEMO_USER_PASSWORD || '123Password*';
+    } else if (!password) {
+      return NextResponse.json(
+        { error: 'Contraseña es requerida' },
         { status: 400 }
       );
     }
