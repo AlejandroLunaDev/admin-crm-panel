@@ -21,9 +21,19 @@ export async function POST(request) {
     }
 
     // Si es el usuario demo, usar la contraseña del servidor (no expuesta al cliente)
-    const demoEmail = process.env.DEMO_USER_EMAIL || 'admin@admin.com';
-    if (email === demoEmail) {
-      password = process.env.DEMO_USER_PASSWORD || '123Password*';
+    const demoEmailServer = process.env.DEMO_USER_EMAIL || 'admin@admin.com';
+    const demoEmailClient = process.env.NEXT_PUBLIC_DEMO_USER_EMAIL || 'admin@admin.com';
+    const isDemoUser = email === demoEmailServer || email === demoEmailClient;
+    
+    if (isDemoUser) {
+      // Si hay contraseña configurada en env, usarla; si no, usar contraseña según el email
+      if (process.env.DEMO_USER_PASSWORD) {
+        password = process.env.DEMO_USER_PASSWORD;
+      } else if (email === 'demo@demo.com') {
+        password = 'demo123';
+      } else {
+        password = '123Password*';
+      }
     } else if (!password) {
       return NextResponse.json(
         { error: 'Contraseña es requerida' },
