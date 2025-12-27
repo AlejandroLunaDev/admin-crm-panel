@@ -5,7 +5,7 @@
 
 import {
   API_URL,
-  commonHeaders,
+  getAuthHeaders,
   mapTicketStatusToFrontend,
   handleResponseError
 } from '../config';
@@ -49,17 +49,33 @@ export async function getTickets(options = {}) {
     // Para debugging
     console.log('URL Params para tickets:', params.toString());
 
-    // URL para obtener los tickets con parámetros
-    const url = `${API_URL}/support-tickets?${params.toString()}`;
+    // Usar API route local de Next.js para evitar CORS
+    const url = `/api/tickets?${params.toString()}`;
 
-    // Realizar la petición
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/99f471bd-c68c-4cd9-83d3-8b91e77dc4de',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'getTickets.js:56',message:'Fetching tickets via Next.js API route',data:{url,isClient:typeof window!=='undefined',origin:typeof window!=='undefined'?window.location.origin:'server'},timestamp:Date.now(),sessionId:'debug-session',runId:'run3',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
+
+    // Realizar la petición a la API route local (sin necesidad de headers de auth, las cookies se envían automáticamente)
     const response = await fetch(url, {
       method: 'GET',
-      headers: commonHeaders
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      credentials: 'include'
     });
 
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/99f471bd-c68c-4cd9-83d3-8b91e77dc4de',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'getTickets.js:60',message:'Fetch response received',data:{ok:response.ok,status:response.status,statusText:response.statusText,headers:Object.fromEntries(response.headers.entries())},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
+
     if (!response.ok) {
-      throw new Error(await handleResponseError(response));
+      // #region agent log
+      const errorText = await handleResponseError(response);
+      fetch('http://127.0.0.1:7243/ingest/99f471bd-c68c-4cd9-83d3-8b91e77dc4de',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'getTickets.js:62',message:'Fetch error occurred',data:{status:response.status,statusText:response.statusText,errorText,isCorsError:errorText.includes('CORS')||errorText.includes('Failed to fetch')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+      // #endregion
+      throw new Error(errorText);
     }
 
     const data = await response.json();
@@ -74,6 +90,9 @@ export async function getTickets(options = {}) {
     // No transformamos los datos aquí, devolvemos la respuesta tal cual para que el adaptador la procese
     return data;
   } catch (error) {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/99f471bd-c68c-4cd9-83d3-8b91e77dc4de',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'getTickets.js:88',message:'Exception caught',data:{errorMessage:error.message,errorName:error.name,isCorsError:error.message.includes('CORS')||error.message.includes('Failed to fetch')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     console.error('Error al obtener tickets:', error);
     throw new Error(`Error al obtener tickets: ${error.message}`);
   }

@@ -33,17 +33,35 @@ const fetchClient = {
    */
   async get(endpoint) {
     try {
-      // Obtener token de autenticación
-      const authToken = getAuthToken();
+      // Usar API route local de Next.js para evitar CORS
+      // Mapear endpoints del backend a rutas locales de Next.js
+      let localEndpoint = endpoint;
+      if (endpoint === '/users') {
+        localEndpoint = '/api/users';
+      } else if (endpoint.startsWith('/users/')) {
+        // Para endpoints específicos de usuarios, mantener la estructura pero usar API route
+        localEndpoint = `/api${endpoint}`;
+      } else {
+        // Para otros endpoints, usar directamente (pueden ser rutas internas)
+        localEndpoint = endpoint.startsWith('/api') ? endpoint : `/api${endpoint}`;
+      }
 
-      const response = await fetch(`${API_URL}${endpoint}`, {
+      // #region agent log
+      fetch('http://127.0.0.1:7243/ingest/99f471bd-c68c-4cd9-83d3-8b91e77dc4de',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'fetch-client.js:39',message:'Fetching via Next.js API route',data:{endpoint,localEndpoint,isClient:typeof window!=='undefined',origin:typeof window!=='undefined'?window.location.origin:'server'},timestamp:Date.now(),sessionId:'debug-session',runId:'run3',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
+
+      const response = await fetch(localEndpoint, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: authToken ? `Bearer ${authToken}` : ''
+          Accept: 'application/json'
         },
         credentials: 'include'
       });
+
+      // #region agent log
+      fetch('http://127.0.0.1:7243/ingest/99f471bd-c68c-4cd9-83d3-8b91e77dc4de',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'fetch-client.js:48',message:'Fetch response',data:{ok:response.ok,status:response.status,statusText:response.statusText},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+      // #endregion
 
       if (!response.ok) {
         // Parse el cuerpo de la respuesta para obtener el mensaje de error
@@ -60,6 +78,10 @@ const fetchClient = {
 
       return await response.json();
     } catch (error) {
+      // #region agent log
+      fetch('http://127.0.0.1:7243/ingest/99f471bd-c68c-4cd9-83d3-8b91e77dc4de',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'fetch-client.js:70',message:'Exception caught in get method',data:{errorMessage:error.message,errorName:error.name,isCorsError:error.message.includes('CORS')||error.message.includes('Failed to fetch')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+      // #endregion
+
       // Si ya es un error estructurado, lo propagamos
       if (error.statusCode) {
         throw error;

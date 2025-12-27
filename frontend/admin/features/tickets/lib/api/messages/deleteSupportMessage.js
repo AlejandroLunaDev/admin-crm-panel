@@ -3,7 +3,7 @@
  * Implementa la operación DELETE a la API de mensajes
  */
 
-import { API_URL, commonHeaders, handleResponseError } from '../config';
+import { API_URL, getAuthHeaders, handleResponseError } from '../config';
 
 /**
  * Elimina un mensaje de soporte por su ID
@@ -18,7 +18,7 @@ export async function deleteSupportMessage(messageId) {
   try {
     const response = await fetch(`${API_URL}/support-messages/${messageId}`, {
       method: 'DELETE',
-      headers: commonHeaders,
+      headers: getAuthHeaders(),
       credentials: 'include'
     });
 

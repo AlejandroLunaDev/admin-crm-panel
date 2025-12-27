@@ -4,9 +4,47 @@
  */
 
 // URL base para todas las llamadas a la API
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://admin-crm-panel-back.onrender.com/api';
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  'https://admin-crm-panel-back.onrender.com/api';
 
-// Headers comunes para todas las peticiones
+/**
+ * Obtiene el token de autenticación de las cookies
+ * @returns {string|null} - Token de autenticación o null si no existe
+ */
+export function getAuthToken() {
+  if (typeof document === 'undefined') return null;
+
+  const authCookie = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('auth_token='));
+
+  if (authCookie) {
+    return decodeURIComponent(authCookie.split('=')[1]);
+  }
+
+  return null;
+}
+
+/**
+ * Obtiene los headers comunes con autenticación
+ * @returns {Object} - Headers con Content-Type, Accept y Authorization si hay token
+ */
+export function getAuthHeaders() {
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json'
+  };
+
+  const token = getAuthToken();
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  return headers;
+}
+
+// Headers comunes para todas las peticiones (mantener para compatibilidad)
 export const commonHeaders = {
   'Content-Type': 'application/json',
   Accept: 'application/json'

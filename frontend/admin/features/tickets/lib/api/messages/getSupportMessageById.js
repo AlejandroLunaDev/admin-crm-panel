@@ -3,7 +3,7 @@
  * Implementa la consulta GET a la API de mensajes con ID
  */
 
-import { API_URL, commonHeaders, handleResponseError } from '../config';
+import { API_URL, getAuthHeaders, handleResponseError } from '../config';
 
 /**
  * Obtiene un mensaje de soporte específico por su ID
@@ -20,7 +20,7 @@ export async function getSupportMessageById(messageId) {
 
     const response = await fetch(url, {
       method: 'GET',
-      headers: commonHeaders,
+      headers: getAuthHeaders(),
       credentials: 'include'
     });
 

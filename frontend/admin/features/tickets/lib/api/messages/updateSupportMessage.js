@@ -3,7 +3,7 @@
  * Implementa la operación PUT a la API de mensajes
  */
 
-import { API_URL, commonHeaders, handleResponseError } from '../config';
+import { API_URL, getAuthHeaders, handleResponseError } from '../config';
 
 /**
  * Actualiza un mensaje de soporte existente
@@ -26,7 +26,7 @@ export async function updateSupportMessage(messageId, messageData) {
     // Realizar la petición
     const response = await fetch(`${API_URL}/support-messages/${messageId}`, {
       method: 'PUT',
-      headers: commonHeaders,
+      headers: getAuthHeaders(),
       credentials: 'include',
       body: JSON.stringify(messageData)
     });

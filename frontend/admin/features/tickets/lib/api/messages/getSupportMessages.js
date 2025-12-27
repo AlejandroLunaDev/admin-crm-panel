@@ -3,7 +3,7 @@
  * Implementa la consulta GET a la API de mensajes
  */
 
-import { API_URL, commonHeaders, handleResponseError } from '../config';
+import { API_URL, getAuthHeaders, handleResponseError } from '../config';
 
 /**
  * Obtiene todos los mensajes de soporte, opcionalmente filtrados
@@ -40,7 +40,7 @@ export async function getSupportMessages(filters = {}) {
     // Realizar la petición
     const response = await fetch(url, {
       method: 'GET',
-      headers: commonHeaders,
+      headers: getAuthHeaders(),
       credentials: 'include'
     });
 
@@ -81,7 +81,7 @@ async function getTicketMessages(ticketId) {
     // Realizar la petición
     const response = await fetch(url, {
       method: 'GET',
-      headers: commonHeaders,
+      headers: getAuthHeaders(),
       credentials: 'include'
     });
 

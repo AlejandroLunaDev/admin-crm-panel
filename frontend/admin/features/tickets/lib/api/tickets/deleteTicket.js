@@ -3,7 +3,7 @@
  * Implementa la operación DELETE a la API de tickets
  */
 
-import { API_URL, commonHeaders, handleResponseError } from '../config';
+import { API_URL, getAuthHeaders, handleResponseError } from '../config';
 
 /**
  * Elimina un ticket de soporte por su ID
@@ -18,7 +18,7 @@ export async function deleteTicket(ticketId) {
   try {
     const response = await fetch(`${API_URL}/support-tickets/${ticketId}`, {
       method: 'DELETE',
-      headers: commonHeaders,
+      headers: getAuthHeaders(),
       credentials: 'include'
     });
 

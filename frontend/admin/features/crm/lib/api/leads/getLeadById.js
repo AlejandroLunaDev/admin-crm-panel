@@ -3,7 +3,7 @@
  * Sigue el principio SRP al encargarse únicamente de obtener un lead específico
  */
 
-import { API_URL, commonHeaders } from './config';
+import { API_URL, getAuthHeaders } from './config';
 
 /**
  * Obtiene un lead por su ID
@@ -13,7 +13,7 @@ import { API_URL, commonHeaders } from './config';
 export async function getLeadById(id) {
   try {
     const response = await fetch(`${API_URL}/leads/${id}`, {
-      headers: commonHeaders
+      headers: getAuthHeaders()
     });
 
     if (!response.ok) {

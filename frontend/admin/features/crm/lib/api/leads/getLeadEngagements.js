@@ -3,7 +3,7 @@
  * Sigue el principio SRP al encargarse únicamente de obtener los contactos de un lead específico
  */
 
-import { API_URL, commonHeaders } from './config';
+import { API_URL, getAuthHeaders } from './config';
 
 /**
  * Obtiene los contactos de un lead específico
@@ -16,7 +16,7 @@ export async function getLeadEngagements(leadId) {
 
     const response = await fetch(url, {
       method: 'GET',
-      headers: commonHeaders
+      headers: getAuthHeaders()
     });
 
     if (!response.ok) {

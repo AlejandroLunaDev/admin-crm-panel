@@ -3,7 +3,7 @@
  * Implementa la consulta GET a la API de usuarios
  */
 
-import { API_URL, commonHeaders, handleResponseError } from '../config';
+import { API_URL, getAuthHeaders, handleResponseError } from '../config';
 
 /**
  * Obtiene información detallada de un usuario por su ID
@@ -22,14 +22,18 @@ export async function getUserById(userId) {
       `[DEBUG] getUserById: Intentando obtener usuario con ID: "${userId}"`
     );
 
-    const url = `${API_URL}/users/${userId}`;
+    // Usar API route local de Next.js para evitar CORS
+    const url = `/api/users/${userId}`;
 
     console.log(`Obteniendo información del usuario ${userId} desde: ${url}`);
 
-    // Realizar la petición
+    // Realizar la petición a la API route local
     const response = await fetch(url, {
       method: 'GET',
-      headers: commonHeaders,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
       credentials: 'include'
     });
 

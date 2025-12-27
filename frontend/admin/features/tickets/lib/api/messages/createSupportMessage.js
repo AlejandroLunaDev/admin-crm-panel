@@ -3,7 +3,7 @@
  * Implementa la operación POST a la API de mensajes
  */
 
-import { API_URL, commonHeaders, handleResponseError } from '../config';
+import { API_URL, getAuthHeaders, handleResponseError } from '../config';
 
 /**
  * Crea un nuevo mensaje de soporte
@@ -56,7 +56,7 @@ export async function createSupportMessage(messageData) {
     // Realizar la petición
     const response = await fetch(`${API_URL}/support-messages`, {
       method: 'POST',
-      headers: commonHeaders,
+      headers: getAuthHeaders(),
       credentials: 'include', // Esto permite enviar cookies, para que el backend identifique al usuario
       body: JSON.stringify(dataToSend)
     });
